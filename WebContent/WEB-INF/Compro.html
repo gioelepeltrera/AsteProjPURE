@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/mystyleT.css}">
+	<title>Compro</title>
+</head>
+
+<body class="buy">
+	<div class="header">
+		<a class="home" href="./HomeT.html" th:href="@{/GoToHome}">HOME</a>
+	</div>
+	<p>Ecco la tua pagina Compro, <span th:text="${session.user.username}">Gioele</span>, cerca nuove Aste o
+		controlla quelle aggiudicate</p>
+
+	<form th:action=@{/SearchAuction} method="POST">
+		<fieldset>
+			<legend> Ricerca aste aperte </legend>
+			<div class="formitem">
+				<label for="keyword">Parola chiave:</label>
+				<input type="text" name="keyword" required> <br>
+			</div>
+			<input class="submit" type="submit" name="submit" value="Cerca Aste">
+		</fieldset>
+	</form>
+
+	<div th:if="${not #lists.isEmpty(searchResult)}">
+		<p>
+			Ecco le aste trovate per : <span th:text="${param.keyword}"> parola chiave</span>
+		</p>
+		<table class="buyTable">
+			<thead>
+				<tr>
+					<th>Nome Articolo</th>
+					<th>Offerta massima</th>
+					<th>giorni rimanenti</th>
+					<th>ore rimanenti</th>
+					<th>minuti rimanenti</th>
+					<th>Scadenza</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="s: ${searchResult}">
+					<td class="linked"><a href="OffertaT.html" th:href="@{/GoToBid(codArt=${s.codArt})}"><span
+								th:text="${s.artName}">bottiglia</span></a></td>
+					<td th:text="${s.maxBid}">24</td>
+					<td th:text="${s.daysLeft}">11</td>
+					<td th:text="${s.hoursLeft}">21</td>
+					<td th:text="${s.minutesLeft}">50</td>
+					<td th:text="${s.expDate}">Sat 12 Jul 21:24 CEST 2021</td>
+					<td th:text="${s.codArt}" hidden="true"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${#lists.isEmpty(searchResult)}">
+		<p th:if="${param.keyword == null}">Inserisci una parola chiave valida per effettuare la ricerca</p>
+		<p th:if="${param.keyword != null}">Nessuna asta trovata per la tua parola chiave</p>
+	</div>
+
+	<div th:if="${not #lists.isEmpty(wonAuctions)}">
+		<h3>Aste vinte</h3>
+		<table class="buyTable">
+			<thead>
+				<tr>
+					<th>Nome Articolo</th>
+					<th>Offerta massima</th>
+					<th>Scaduta in data</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="s: ${wonAuctions}">
+					<td th:text="${s.artName}">prova</td>
+					<td th:text="${s.maxBid}">90</td>
+					<td th:text="${s.expDate}">12 32 44 cest 32903</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${#lists.isEmpty(wonAuctions)}">
+		<h3>Ancora non hai vinto nessuna asta</h3>
+	</div>
+
+</html>

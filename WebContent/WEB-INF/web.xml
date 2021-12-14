@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>TIW2021-ASTE-TEST</display-name>
+  <context-param>
+    <param-name>dbUrl</param-name>
+    <param-value>jdbc:mysql://localhost:3306/tiw_proj?serverTimezone=Europe/Rome</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbUser</param-name>
+    <param-value>gioeleTest</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPassword</param-name>
+    <param-value>G10ele_Test</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbDriver</param-name>
+    <param-value>com.mysql.cj.jdbc.Driver</param-value>
+  </context-param>
+  <filter>
+  	<filter-name>LoggedInChecker</filter-name>
+  	<filter-class>filters.LoggedInChecker</filter-class>
+  </filter>
+  <filter-mapping>
+    	<filter-name>LoggedInChecker</filter-name>
+  		<url-pattern>/GoToBuy</url-pattern>
+  		<url-pattern>/GoToSell</url-pattern>
+  		<url-pattern>/GoToBid</url-pattern>
+  		<url-pattern>/GoToHome</url-pattern>
+  		<url-pattern>/Logout</url-pattern>
+  		<url-pattern>/MakeBid</url-pattern>
+  		<url-pattern>/SearchAuction</url-pattern>
+  		<url-pattern>/CreaAsta</url-pattern>
+  		<url-pattern>/CloseAuction</url-pattern>
+  		<url-pattern>/GetAuctionInfo</url-pattern>
+  </filter-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>

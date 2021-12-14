@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/mystyleT.css}">
+  <title>Dettaglio Asta</title>
+</head>
+
+<body class="sell">
+  <div class="header duo">
+
+  <a class="home" href="HomeT.html" th:href="@{/GoToHome}">HOME</a>
+  <a class="vendoLink" href="VendoT.html" th:href="@{/GoToSell}">Vendo</a>
+</div>
+
+  <h2>Dettagli asta</h2>
+  <table class="dettagliAsta">
+    <tbody>
+      <tr>
+        <td class="leftCol">Nome articolo</td>
+        <td th:text="${asta.nomeArt}">prova articolo</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Descrizione articolo</td>
+        <td th:text="${asta.description}">prova Descrizione articolo</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Base d'asta</td>
+        <td th:text="${asta.startingPrice}">22</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Rialzo minimo</td>
+        <td th:text="${asta.minimumRaise}">1</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Data Scadenza asta</td>
+        <td th:text="${asta.expDate}">21 02 15</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <img width="300" th:src="@{'data:image/jpeg;base64,'+${asta.image}}" />
+
+
+  </div>
+  <div th:unless="${asta.closed}">
+    <div th:if="${not #lists.isEmpty(auctionBids)}">
+
+      <h2>Offerte</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>username</th>
+            <th>valoreofferta</th>
+            <th>data e ora offerta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="b: ${auctionBids}">
+            <td th:text="${b.username}">Giangiovanni</td>
+            <td th:text="${b.value}">22</td>
+            <td th:text="${b.date}">Sat 12 Jul 21:12 CEST 2021</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:if="${#lists.isEmpty(auctionBids)}">
+      <p>Questa asta non ha ancora ricevuto offerte</p>
+    </div>
+
+  </div>
+
+  <div th:if="${asta.isClosable()}">
+    <form th:action=@{/CloseAuction} method="post">
+      <input type="hidden" name="codArt" th:value="${asta.codArt}">
+      <input class="chiudi" type="submit" name="submit" value="CHIUDI">
+    </form>
+  </div>
+
+  <div th:if="${asta.closed}">
+    <div th:if="${winnerUser != null}">
+      <h2>Vincitore Asta</h2>
+      <table>
+        <tr>
+          <td class="leftCol">Nome utente </td>
+          <td th:text="${winnerUser.username}">Giangiovanni</td>
+        </tr>
+        <tr>
+          <td class="leftCol">Dati spedizione </td>
+          <td th:text="${winnerUser.DatiSpedizione}">Roma, via del Corso 22</td>
+        </tr>
+        <tr>
+          <td class="leftCol">Offerta vincente </td>
+          <td th:text="${winnerUser.finalBid}">190</td>
+        </tr>
+    </table>
+    </div>
+    <div th:if="${winnerUser == null}">
+      <p>Questa asta non ha ricevuto offerte</p>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

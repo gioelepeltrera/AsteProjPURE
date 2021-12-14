@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/mystyleT.css}">
+	<title>Vendo</title>
+</head>
+
+<body class="sell">
+	<div class="header">
+		<a class="home" href="HomeT.html" th:href="@{/GoToHome}">HOME</a>
+	</div>
+	<p>Ecco la tua pagina Vendo, <span th:text="${session.user.username}">Gioele</span>, crea una nuova asta o
+		monitora quelle vecchie</p>
+
+	<form th:action=@{/CreaAsta} method="POST" enctype='multipart/form-data'>
+		<fieldset>
+			<legend> Crea una nuova asta </legend>
+			<div class="formitem">
+				<label for="name">Nome articolo:</label>
+				<input type="text" name="name" required> <br>
+			</div>
+			<div class="formitem">
+				<label for="description">Descrizione:</label>
+				<input type="text" name="description" required> <br>
+			</div>
+			<div class="formitem">
+				<label for="image">Scegli immagine:</label>
+				<input type=file name="image" accept="image/*" required> <br>
+			</div>
+			<div class="formitem">
+					<label for="startingprice">Prezzo iniziale:</label>
+					<input type="number" name="startingprice" value="0" min="0" step="0.5" required> <br>
+				</div>
+
+				<div class="formitem">
+
+					<label for="minimumraise">Rialzo minimo:</label>
+					<input type="number" name="minimumraise" value="0.5" min="0.5" step="0.5" required> <br>
+				</div>
+				<div class="formitem">
+
+					<label for="expirationdate">Data chiusura:</label>
+					<input type="datetime-local" name="expirationdate" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}+'T'+${#dates.format(#dates.createNow() ,'HH:mm')}" min="2021-07-14T17:20:00" required> <br>
+				</div>
+
+				<input class="submit" type="submit" name="submit" value="Crea Asta">
+		</fieldset>
+	</form>
+	<div th:if="${not #lists.isEmpty(openAuctions)}">
+		<h2>Le tue aste aperte</h2>
+		<table class="sellTable">
+			<thead>
+				<tr>
+					<th>ID Articolo</th>
+					<th>Nome Articolo</th>
+					<th>Offerta massima</th>
+					<th>g rim</th>
+					<th>h rim</th>
+					<th>Scadenza</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="o: ${openAuctions}">
+					<td th:text="${o.codArt}">12</td>
+					<td class="linked"><a href="DettagliAstaT.html"
+							th:href="@{/GetAuctionInfo(codArt=${o.codArt})}"><span
+								th:text="${o.artName}">bottiglia</span></a></td>
+					<td th:text="${o.maxBid}">22</td>
+					<td th:text="${o.daysLeft}">8</td>
+					<td th:text="${o.hoursLeft}">11</td>
+					<td th:text="${o.expDate}">48032430394</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${#lists.isEmpty(openAuctions)}">
+		<h3>Non sono presenti tue aste aperte</h3>
+		<p>Crea subito una nuova asta compilando il form!</p>
+	</div>
+
+	<div th:if="${not #lists.isEmpty(closedAuctions)}">
+		<h2>Le tue aste Chiuse</h2>
+		<table class="sellTable">
+			<thead>
+				<tr>
+					<th>ID Articolo</th>
+					<th>Nome Articolo</th>
+					<th>Offerta vincente</th>
+					<th>g passati</th>
+					<th>h passate</th>
+					<th>Scaduta il</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="c: ${closedAuctions}">
+					<td th:text="${c.codArt}">12</td>
+					<td class="linked"><a href="DettagliAstaT.html"
+							th:href="@{/GetAuctionInfo(codArt=${c.codArt})}"><span
+								th:text="${c.artName}">bottiglia</span></a></td>
+					<td th:text="${c.maxBid}">22</td>
+					<td th:text="${c.daysLeft}">8</td>
+					<td th:text="${c.hoursLeft}">11</td>
+					<td th:text="${c.expDate}">480324</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${#lists.isEmpty(closedAuctions)}">
+		<h3>Non è stata chiusa nessuna asta</h3>
+	</div>
+</body>
+
+</html>

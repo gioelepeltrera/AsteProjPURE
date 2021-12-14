@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/mystyleT.css}">
+<title>ASTE HOME</title>
+</head>
+<body>
+  <a class="logout" href="test.html"th:href="@{/Logout}">Logout</a>
+<div class="split left">
+  <span class="whitetext">Ciao <span th:text="${session.user.username}">Gioele</span></span>
+  <a class="centered vendo" href="VendoT.html" th:href="@{/GoToSell}">VENDO</a>
+</div>
+<div class="split right">
+  <a class="centered compro" href="ComproT.html" th:href="@{/GoToBuy}">COMPRO</a>
+</div>
+</body>
+</html>

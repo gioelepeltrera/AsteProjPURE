@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/mystyleT.css}">
+  <title>OFFERTA</title>
+</head>
+
+<body class="buy">
+
+  <div class="header duo">
+    <a class="home" href="HomeT.html" th:href="@{/GoToHome}">HOME</a>
+    <a class="comproLink" href="ComproT.html" th:href="@{/GoToBuy}">Compro</a>
+  </div>
+
+  <h2>Dettagli asta</h2>
+  <table class="dettagliAsta">
+    <tbody>
+      <tr>
+        <td class="leftCol">Nome articolo</td>
+        <td th:text="${asta.nomeArt}">prova articolo</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Descrizione articolo</td>
+        <td th:text="${asta.description}">prova Descrizione articolo</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Base d'asta</td>
+        <td th:text="${asta.startingPrice}">22</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Rialzo minimo</td>
+        <td th:text="${asta.minimumRaise}">1</td>
+      </tr>
+      <tr>
+        <td class="leftCol">Data Scadenza asta</td>
+        <td th:text="${asta.expDate}">21 02 15</td>
+      </tr>
+    </tbody>
+  </table>
+  <img width="300" th:src="@{'data:image/jpeg;base64,'+${asta.image}}" />
+
+
+
+  <div th:if="${not #lists.isEmpty(auctionBids)}">
+
+    <h2>OFFERTE</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>username</th>
+          <th>valoreofferta</th>
+          <th>data e ora offerta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="b: ${auctionBids}">
+          <td th:text="${b.username}">12</td>
+          <td th:text="${b.value}">22</td>
+          <td th:text="${b.date}">8</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:if="${#lists.isEmpty(auctionBids)}">
+    <p>Questa asta non ha ancora ricevuto offerte</p>
+  </div>
+
+
+  <form th:action=@{/MakeBid} method="post">
+    <fieldset>
+      <legend> Fai la tua offerta </legend>
+      <div class="formitem">
+        <label for="bid">Valore: </label>
+        <input type="number" name="value" th:value="${minBid}" th:min="${minBid}" min="0" step="0.5" required> <br>
+      </div>
+
+      <input type="hidden" name="codArt" th:value="${asta.codArt}">
+      <input class="submit" type="submit" name="submit" value="FAI OFFERTA">
+    </fieldset>
+  </form>
+</body>
+
+</html>

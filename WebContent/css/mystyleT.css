@@ -1,0 +1,253 @@
+
+* {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: black;
+}
+
+
+.right {
+  right: 0;
+  background-color: white;
+}
+
+.centered {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 20%;
+  text-decoration: none;
+}
+
+.compro {
+  color: black;
+  font-size: 9vw;
+  transform: rotate(90deg);
+}
+
+.vendo {
+  color: white;
+  font-size: 9vw;
+  transform: rotate(270deg);
+}
+
+.whitetext {
+  font-size: 5vw;
+  color: white;
+}
+
+.logout {
+  right: 0;
+  position: absolute;
+  bottom: 0;
+  font-size: 5vw;
+  text-decoration: none;
+  color: black;
+}
+
+.buy {
+  background-color: white;
+  color: black;
+}
+
+.sell {
+  background-color: black;
+  color: white;
+}
+
+.home {
+  font-size: 6vw;
+}
+
+.comproLink {
+  font-size: 6vw;
+  color: white;
+  background-color: black;
+}
+
+.vendoLink {
+  font-size: 6vw;
+  color: black;
+  background-color: white;
+}
+
+.buy .home {
+  color: black;
+}
+
+.sell .home {
+  color: white;
+}
+
+.header {
+  text-align: center;
+  text-decoration: none;
+  left: 50%;
+  width: 100%;
+}
+
+
+legend {
+  padding: 3px 6px;
+}
+
+.buy legend {
+  background-color: #000;
+  color: #fff;
+}
+
+.sell legend {
+  background-color: white;
+  color: black;
+}
+
+form {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.formitem {
+  margin: 8px;
+  padding: 3px 6px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row;
+}
+
+input.submit {
+  display: block;
+  margin: 8px auto;
+}
+
+p {
+  width: 92%;
+  margin-left: 4%;
+}
+
+table {
+  border-collapse: separate;
+  margin: 25px 0;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.sell table {
+  border: white;
+  border-width: 3px;
+}
+
+.buy table thead tr {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+}
+
+.buy table tbody tr {
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+}
+
+.sell table thead tr {
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+.sell table tbody tr {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.sell table {
+  border: white;
+}
+
+table>td {
+  text-align: center;
+}
+
+.dettagliAsta td, tr {
+  text-align: left;
+}
+
+.linked, .leftCol {
+  background-color: #e2e0e0;
+}
+.sell .leftCol{
+  color: black;
+}
+
+.linked>a {
+  text-decoration: none;
+  color: black;
+}
+
+.buy h3, .buy h2 {
+  margin-left: 5%;
+  color: black;
+}
+
+.sell h2, .sell h3 {
+  margin-left: 5%;
+  color: white;
+}
+
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  max-width: 300px;
+}
+
+
+.sign {
+  height: 50%;
+  width: 60%;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  overflow-x: hidden;
+  margin-top: 25%;
+  margin-bottom: 25%;
+  padding-top: 20px;
+}
+
+.logLink, .logLink>a{
+  width: 50%;
+  position: absolute;
+  bottom: 0;
+  font-size: 5vw;
+  color: black;
+} 
+.logLink > a{
+  text-decoration: underline;
+  color: white;
+  background-color: black;
+  text-align: center;
+  margin-left: 1em;
+}
+
+.chiudi {
+  text-decoration: underline;
+  font-size: 5vw;
+  width: 30%;
+  margin-left: 35%;
+}
